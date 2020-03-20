@@ -29,6 +29,7 @@
             <hr>
         </div>
 
+        @if($thread->replies->count())
         <div class="col-12">
             <h5>Respostas</h5>
             <hr>
@@ -43,6 +44,7 @@
                 </div>
             @endforeach
         </div>
+        @endif
 
         <div class="col-12">
             <hr>
@@ -51,7 +53,12 @@
                 <div class="form-group">
                     <input type="hidden" name="thread_id" value="{{$thread->id}}">
                     <label>Responder</label>
-                    <textarea name="reply" id="" cols="30" rows="5" class="form-control"></textarea>
+                    <textarea name="reply" id="" cols="30" rows="5" class="form-control @error('reply') is-invalid @enderror">{{old('reply')}}</textarea>
+                    @error('reply')
+                    <div class="invalid-feedback">
+                        {{$message}}
+                    </div>
+                    @enderror
                 </div>
                 <button type="submit" class="btn btn-success">Responder</button>
             </form>
