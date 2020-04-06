@@ -8,6 +8,7 @@ use App\{
 	Thread,
 	Channel
 };
+use Illuminate\Support\Facades\Gate;
 use Illuminate\Support\Str;
 use App\Http\Requests\ThreadRequest;
 
@@ -28,6 +29,12 @@ class ThreadController extends Controller
      */
     public function index(Request $request, Channel $channel)
     {
+    	//$this->authorize('access-index-forum');
+
+//	    if(!Gate::allows('access-index-thread')) {
+//	    	return dd('Não tenho permissão!');
+//	    }
+
     	$channelParam = $request->channel;
 
     	if(null !== $channelParam) {
@@ -101,6 +108,8 @@ class ThreadController extends Controller
     public function edit($thread)
     {
     	$thread = $this->thread->whereSlug($thread)->first();
+
+    	$this->authorize('update', $thread);
 
 	    return view('threads.edit', compact('thread'));
     }
