@@ -25,9 +25,15 @@ class AuthServiceProvider extends ServiceProvider
     {
         $this->registerPolicies();
 
-        Gate::define('access-index-thread', function($user){
-        	return $user->isAdmin();
-        });
 
+        $resources = \App\Resource::all();
+
+        foreach($resources as $resource) {
+
+        	Gate::define($resource->resource, function($user) use ($resource){
+		        return $resource->roles->contains($user->role);
+	        });
+
+        }
     }
 }
