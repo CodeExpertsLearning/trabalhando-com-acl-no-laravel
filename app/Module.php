@@ -4,17 +4,17 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 
-class Resource extends Model
+class Module extends Model
 {
-	protected $fillable = ['name', 'resource', 'is_menu'];
+    protected $fillable = ['name'];
 
     public function roles()
     {
     	return $this->belongsToMany(Role::class);
     }
 
-    public function module()
+    public function resources()
     {
-    	return $this->belongsTo(Module::class);
+    	return $this->hasMany(Resource::class);
     }
 }

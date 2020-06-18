@@ -17,4 +17,9 @@ class Role extends Model
     {
     	return $this->belongsToMany(Resource::class);
     }
+
+    public function modules()
+    {
+    	return $this->belongsToMany(Module::class);
+    }
 }
