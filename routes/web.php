@@ -27,7 +27,7 @@ Route::post('/replies/store', 'ReplyController@store')->name('replies.store');
 Auth::routes();
 
 
-Route::group(['middleware' => 'auth', 'namespace' => 'Manager', 'prefix' => 'manager'], function(){
+Route::group(['middleware' => ['auth', 'access.control.list'], 'namespace' => 'Manager', 'prefix' => 'manager'], function(){
 	Route::get('/', function(){
 		return redirect()->route('users.index');
 	});
@@ -39,3 +39,10 @@ Route::group(['middleware' => 'auth', 'namespace' => 'Manager', 'prefix' => 'man
 	Route::resource('users', 'UserController');
 	Route::resource('resources', 'ResourceController');
 });
+
+//
+//Route::get('routes', function(){
+//	foreach(Route::getRoutes()->getRoutes() as $route) {
+//		print $route->getName() . '<hr>';
+//	}
+//});
