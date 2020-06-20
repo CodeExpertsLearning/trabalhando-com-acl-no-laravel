@@ -29,7 +29,9 @@ class AuthServiceProvider extends ServiceProvider
         $resources = \App\Resource::all();
 
         Gate::before(function($user){
-        	return $user->isAdmin();
+        	if($user->isAdmin()) {
+        		return true;
+	        }
         });
 
         foreach($resources as $resource) {

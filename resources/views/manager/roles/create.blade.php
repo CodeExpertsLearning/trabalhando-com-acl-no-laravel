@@ -9,7 +9,7 @@
 
     <div class="row">
        <div class="col-md-12">
-           @php var_dump($errors->all()) @endphp
+
            <hr>
            <form action="{{route('roles.store')}}"  method="post">
                @csrf

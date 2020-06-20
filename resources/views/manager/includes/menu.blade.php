@@ -10,9 +10,9 @@
 
                 @foreach($m['resources'] as $r)
                     <li class="nav-item">
-                        <a class="nav-link" href="{{route($r->resource)}}">
+                        <a class="nav-link" href="{{route($r['resource'])}}">
                             <span data-feather="file"></span>
-                            {{$r->name}}
+                            {{$r['name']}}
                         </a>
                     </li>
                 @endforeach

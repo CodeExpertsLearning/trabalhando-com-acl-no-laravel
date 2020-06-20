@@ -38,6 +38,10 @@ Route::group(['middleware' => ['auth', 'access.control.list'], 'namespace' => 'M
 
 	Route::resource('users', 'UserController');
 	Route::resource('resources', 'ResourceController');
+	Route::resource('modules', 'ModuleController');
+	Route::get('modules/{module}/resources', 'ModuleController@syncResources')->name('modules.resources');
+	Route::put('modules/{module}/resources', 'ModuleController@updateSyncResources')->name('modules.resources.update');
+
 });
 
 //

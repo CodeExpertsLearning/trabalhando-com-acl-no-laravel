@@ -53,11 +53,11 @@ class RoleController extends Controller
 	    try {
 	    	$this->role->create($request->all());
 
-		    flash('Papél atualizado com sucesso!')->success();
+		    flash('Papél criado com sucesso!')->success();
 		    return redirect()->route('roles.index');
 
 	    }catch (\Exception $e) {
-		    $message = env('APP_DEBUG') ? $e->getMessage() : 'Erro ao processar atualização...';
+		    $message = env('APP_DEBUG') ? $e->getMessage() : 'Erro ao processar criação...';
 
 		    flash($message)->error();
 		    return redirect()->back();
