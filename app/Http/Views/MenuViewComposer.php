@@ -21,10 +21,14 @@ class MenuViewComposer
 		if(!$modulesFiltered) {
 
 			if($user->isAdmin()) {
-				$modulesFiltered = $this->module->with('resources')->get()->toArray();
+
+				$modulesFiltered = ($this->getModules($this->module))->toArray();
+
 			} else {
 
-				foreach($user->role->modules as $key => $module) {
+				$modules = $this->getModules($user->role->modules());
+
+				foreach($modules as $key => $module) {
 					$modulesFiltered[$key]['name'] = $module->name;
 
 					foreach($module->resources  as $k => $resource) {
@@ -42,5 +46,12 @@ class MenuViewComposer
 		}
 
 		return $view->with('modules', $modulesFiltered);
+	}
+
+	public function getModules($module)
+	{
+		return $module->with(['resources' => function($queryBuilder){
+			return $queryBuilder->where('is_menu', true);
+		}])->get();
 	}
 }
