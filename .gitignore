@@ -13,3 +13,4 @@ yarn-error.log
 /database/*.sqlite
 .idea
 .DS_Store
+storage/debugbar/
